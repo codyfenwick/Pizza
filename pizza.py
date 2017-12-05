@@ -12,7 +12,7 @@ from tkinter import *
 class Pizza:
     def __init__(self):
         window = Tk()
-        window.title("Pizza Shop")
+        window.title("The Pizza Shop")
         
 #---------------------------------------------------------------------------------------------------------------------------------
 # frame 1
@@ -24,7 +24,7 @@ class Pizza:
         pizzaImage = PhotoImage(file ="image/pizza2.gif")
        
 
-        Label(frame1, image = pizzaImage).grid(row = 1, column = 3, pady = 20)
+        Label(frame1, image = pizzaImage).grid(row = 1, column = 3)
 
 #---------------------------------------------------------------------------------------------------------------------------------
 # frame 2
@@ -41,13 +41,19 @@ class Pizza:
 
         Label(frame2, text = "Choose Pizza Size:").grid(row = 1, column = 1, sticky = W)
         
-        Radiobutton(frame2, text = "Small",variable = self.v1, value = 1).grid(row = 2, column = 2,sticky = W)
+        Radiobutton(frame2, text = "Small  ($7.99)",variable = self.v1, value = 1).grid(row = 2, column = 2,sticky = W)
 
         
-        Radiobutton(frame2, text = "Medium",variable = self.v1, value = 2).grid(row = 3, column = 2,sticky = W)
+
+        
+        Radiobutton(frame2, text = "Medium  ($10.99)",variable = self.v1, value = 2).grid(row = 3, column = 2,sticky = W)
+
+        
 
        
-        Radiobutton(frame2, text = "Large",variable = self.v1, value = 3).grid(row = 4, column = 2,sticky = W)
+        Radiobutton(frame2, text = "Large  ($14.99)",variable = self.v1, value = 3).grid(row = 4, column = 2,sticky = W)
+
+        
 
 #---------------------------------------------------------------------------------------------------------------------------------
 # create buttons for crust type
@@ -58,10 +64,14 @@ class Pizza:
 
         Label(frame2, text = "Choose Pizza Crust:").grid(row = 1, column = 4)
         
-        Radiobutton(frame2, text = "Original",variable = self.v2, value = 1).grid(row = 2,padx = 6, column = 5, sticky = W)
+        Radiobutton(frame2, text = "Original (+ $1.00)",variable = self.v2, value = 1).grid(row = 2,padx = 6, column = 5, sticky = W)
 
         
-        Radiobutton(frame2, text = "Pan",variable = self.v2, value = 2).grid(row = 3,padx = 6, column = 5, sticky = W)
+
+        
+        Radiobutton(frame2, text = "Pan  (+$.50)",variable = self.v2, value = 2).grid(row = 3,padx = 6, column = 5, sticky = W)
+
+        
 
        
         Radiobutton(frame2, text = "Thin",variable = self.v2, value = 3).grid(row = 4,padx = 6, column = 5, sticky = W)
@@ -115,13 +125,13 @@ class Pizza:
         # create checkbuttons for extra items
         self.bread = IntVar()
         self.bread.set(0)
-        Checkbutton(frame2, text = "Cheese Bread", variable = self.bread).grid(row = 10, padx = 6,pady = 26,column = 2)
+        Checkbutton(frame2, text = "Cheese Bread  ($4.99)", variable = self.bread).grid(row = 10, padx = 6,pady = 26,column = 2)
         self.wings = IntVar()
         self.wings.set(0)
-        Checkbutton(frame2, text = "Wings", variable = self.wings).grid(row = 10,padx = 6,pady = 26, column = 3)
+        Checkbutton(frame2, text = "Wings  ($6.99)", variable = self.wings).grid(row = 10,padx = 6,pady = 26, column = 3)
         self.rolls = IntVar()
         self.rolls.set(0)
-        Checkbutton(frame2, text = "Cinnamon Rolls", variable = self.rolls).grid(row = 10,padx = 6,pady = 26, column = 4)
+        Checkbutton(frame2, text = "Cinnamon Rolls  ($5.99)", variable = self.rolls).grid(row = 10,padx = 6,pady = 26, column = 4)
 
 
 
@@ -133,21 +143,21 @@ class Pizza:
 
         # create textbox
         self.name = StringVar()
-        Entry(frame2, textvariable = self.name).grid(row = 11, column = 2)
+        Entry(frame2, textvariable = self.name).grid(row = 11, column = 2, sticky = W)
         
         # create name label
         Label(frame2, text = "Address:").grid(row = 12, column = 1,padx = 1,pady = 1, sticky = E)
 
         # create textbox
         self.address = StringVar()
-        Entry(frame2, textvariable = self.address).grid(row = 12, column = 2)
+        Entry(frame2, textvariable = self.address).grid(row = 12, column = 2, sticky = W)
         
         # create name label
         Label(frame2, text = "City:").grid(row = 13, column = 1,padx = 1,pady = 1, sticky = E)
 
         # create textbox
         self.city = StringVar()
-        Entry(frame2, textvariable = self.city).grid(row = 13, column = 2)
+        Entry(frame2, textvariable = self.city).grid(row = 13, column = 2, sticky = W)
         
         # create name label
         Label(frame2, text = "State:").grid(row = 14, column = 1,padx = 1,pady = 1, sticky = E)
@@ -168,7 +178,7 @@ class Pizza:
 
         # create textbox
         self.phone = StringVar()
-        Entry(frame2, textvariable = self.phone).grid(row = 16, column = 2)
+        Entry(frame2, textvariable = self.phone).grid(row = 16, column = 2, sticky = W)
         
 #---------------------------------------------------------------------------------------------------------------------------------
 # create summary section
@@ -183,21 +193,30 @@ class Pizza:
         Label(frame2, text = "Subtotal").grid(row = 12, column = 4, sticky = W)
         Label(frame2, textvariable = self.total).grid(row = 12, column = 5,sticky = W)
 
+        # label for tax in summary
+        self.tax = StringVar()
+
+        Label(frame2, text = "Tax").grid(row = 13, column = 4, sticky = W)
+        Label(frame2, textvariable = self.tax).grid(row = 13, column = 5,sticky = W)
+
+        self.plus = StringVar()
+        Label(frame2, textvariable = self.plus).grid(row = 13, column = 4, sticky = E)
+
         # label for discount in summary
         self.difference = StringVar()
-        Label(frame2, textvariable = self.difference).grid(row = 13, column = 5, sticky = W)
+        Label(frame2, textvariable = self.difference).grid(row = 14, column = 5, sticky = W)
 
         self.minus = StringVar()
-        Label(frame2, textvariable = self.minus).grid(row = 13, column = 4, sticky = E)
+        Label(frame2, textvariable = self.minus).grid(row = 14, column = 4, sticky = E)
         
 
         # label for total in summary 
-        Label(frame2, text = "Total").grid(row = 14, column = 4, sticky = W)
+        Label(frame2, text = "Total").grid(row = 15, column = 4, sticky = W)
 
         # label for new total after discount
         self.discount = StringVar()
         
-        Label(frame2, textvariable = self.discount).grid(row = 14, column = 5, sticky = W)
+        Label(frame2, textvariable = self.discount).grid(row = 15, column = 5, sticky = W)
 
         # creat buttons
         Button(frame2,text = "Clear", command = self.clear).grid(row = 16, column = 3)
@@ -306,23 +325,42 @@ class Pizza:
         # total calculation
         total = self.calcCrust() + self.calcSize() + self.calcToppings() + self.calcExtras()
         total = round(total, 2)
+
+        rate = .06
+
+        tax = total * rate
+
+        difference = total + tax
+
+        self.plus.set("+")
+
+        tax = float(round(tax, 2))
         
+        discount = float(round(difference,2))
+
+        self.tax.set(format(tax))
+
         self.total.set(format(total))
+
+        self.discount.set(format(discount))
+
+        
+        
 
 
               
     def calcDiscount(self):
-        SENIOR = .10       
+        amount = .10       
 
         # calculate discount for senoirs
-        discount = float(self.total.get()) - float(self.total.get()) * SENIOR
+        discount = float(self.total.get()) - float(self.total.get()) * amount
         discount = float(round(discount, 2))
 
         
         self.discount.set(format(discount))
 
         # calculates the differnce so it can display in the label
-        difference = float(self.total.get()) * SENIOR
+        difference = float(self.total.get()) * amount
 
         difference = float(round(difference,2))
         
@@ -353,5 +391,6 @@ class Pizza:
         self.difference.set("")
         self.discount.set("")
         self.minus.set("")
+        self.tax.set("")
         
 Pizza()
