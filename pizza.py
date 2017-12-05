@@ -344,9 +344,9 @@ class Pizza:
 
         self.discount.set(format(discount))
 
+        self.minus.set("")
         
-        
-
+        self.difference.set("")
 
               
     def calcDiscount(self):
